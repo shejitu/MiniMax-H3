@@ -499,4 +499,111 @@ ComfyUI-Shared/
 - **限制项（negative 思路）**：明确写出"不要……"（如不要面部漂移、不要肢体畸形、不要比例变化），可显著减少常见瑕疵。
 - 官方还提供 `h3-prompt-writing` 技能与 `base-en.txt` / `ref-en.txt` 两份指南（见正文"提示词撰写技巧"），建议优先参考官方写法。
 
+## F. Kaggle 云端部署方案
+
+本地没有大显存显卡时，Kaggle Notebook 的免费 GPU 是成本最低的试跑途径。核心结论：**能跑通，`/kaggle/working` 的 20G 限制不是障碍**。
+
+### F.1 为什么 20G 不是障碍（存储机制）
+
+Kaggle 的磁盘配额是**分区独立**的，关键在于模型根本不进 `working`：
+
+| 路径 | 配额 | 用途 | 占 20G 吗 |
+|---|---|---|---|
+| `/kaggle/input` | 独立（Dataset/Model 配额，私有约 200G+） | **只读挂载**模型权重 | ❌ 不占 |
+| `/kaggle/working` | **20G** | 代码、依赖、生成的视频 | ✅ 占 |
+| `/kaggle/temp` | 较大 | 临时中转 | ❌ 不计入 |
+
+模型作为 Private Dataset 挂在 `/kaggle/input` 后，ComfyUI / diffusers 通过 **mmap 直接读取**，全程不需要把 21G 复制进 `working`。`working` 里只放几百 MB 的代码与依赖，加上生成的视频（单条 10 秒 768p 通常几十 MB），远低于 20G。
+
+### F.2 GPU 选型（决定能否跑起来）
+
+| 加速器 | 显存 | 算力 | 结论 |
+|---|---|---|---|
+| **T4 ×2** | 16G + 16G（合计 32G） | ~65 TFLOPS/卡（FP16，有 Tensor Core） | ✅ **推荐**，唯一稳妥选项 |
+| P100 | 16G | ~18 TFLOPS（无 Tensor Core） | ❌ 不推荐，显存不够且算力低，极易 OOM |
+
+> **显存是硬门槛**：4090 跑 10 秒 720P 实测约需 44G 显存（含 Qwen3-VL-32B 文本编码器）。Kaggle 最高只有 32G，因此**必须使用量化权重**——主扩散模型用 INT8（约 8G）+ 文本编码器用 NVFP4（约 16G），才能塞进 32G。官方原生 BF16 权重在 Kaggle 上跑不动完整管线。
+
+### F.3 操作步骤
+
+**① 上传模型到 Private Dataset**
+
+Kaggle → Datasets → New Dataset，按组件上传，文件名保持原样（ComfyUI 按路径查找）：
+
+```text
+minimax-h3/
+├── diffusion_models/   ← 主扩散模型（INT8 量化版，如 turbo-int8-convrot）
+├── vae/                ← VAE 自编码器
+└── text_encoders/      ← 文本编码器（Qwen3-VL-32B NVFP4 量化版）
+```
+
+> ⚠️ Kaggle Dataset **单文件上限约 50G**。21G 总量没问题；若某个权重文件超限，需先 `split` 分片再传，加载时 `cat` 合并。
+
+**② 创建 Notebook 并挂载**
+
+新建 Notebook → 右侧 *Add Data* 选择刚建的 Private Dataset → 打开 **Internet** 与 **Accelerator：GPU T4 ×2**。
+
+```python
+import os
+for root, dirs, files in os.walk('/kaggle/input'):
+    if files:
+        print(root, '->', files[:3])
+```
+
+**③ 安装运行环境**
+
+Kaggle 预装了 torch/transformers，但**没有 ComfyUI**，需自行安装（约 10–20 分钟）：
+
+```bash
+!git clone https://github.com/Comfy-Org/ComfyUI.git /kaggle/working/ComfyUI
+%cd /kaggle/working/ComfyUI
+!pip install -q -r requirements.txt
+# 可选加速：SageAttention
+!pip install -q sageattention
+```
+
+> 💡 **省时技巧**：第一次装好后，把 `site-packages` 打包成第二个 Dataset，下次直接本地安装，可省约 15 分钟。
+
+**④ 把模型软链到 ComfyUI**
+
+不要复制 21G，用软链（或在 `extra_model_paths.yaml` 中直接指向 input 路径）：
+
+```bash
+!mkdir -p /kaggle/working/ComfyUI/models
+!ln -s /kaggle/input/minimax-h3/diffusion_models /kaggle/working/ComfyUI/models/diffusion_models
+!ln -s /kaggle/input/minimax-h3/vae            /kaggle/working/ComfyUI/models/vae
+!ln -s /kaggle/input/minimax-h3/text_encoders  /kaggle/working/ComfyUI/models/text_encoders
+```
+
+**⑤ 启动并生成**
+
+```bash
+!cd /kaggle/working/ComfyUI && nohup python main.py --listen 0.0.0.0 --port 8188 > comfy.log 2>&1 &
+```
+
+在 ComfyUI 中加载工作流（官方 T2V / R2V 模板，或社区 4 步加速版），生成结果默认落在 `ComfyUI/output/`，即 `/kaggle/working/` 下，**Commit 后可在 Output 面板直接下载**。
+
+### F.4 耗时与产能预估
+
+| 项目 | T4 ×2 预估 |
+|---|---|
+| 首条额外开销（模型加载 + 量化 + CUDA warmup，一次性） | 3–6 分钟 |
+| 480P（864×480）单条 10 秒视频 | 5–10 分钟 |
+| 720P（1280×736）单条 10 秒视频 | 15–25 分钟（开 SageAttention + EasyCache 可压到 ~15 分钟） |
+
+**产能账**：免费 GPU **30 小时/周**、单次会话最长 **9 小时**。按 15 分钟/条（含环境重建）估算，一周约可产出 **30–40 条** 10 秒视频。
+
+### F.5 常见坑与对策
+
+| 坑 | 对策 |
+|---|---|
+| **OOM（显存爆掉）** | 换 T4×2；必须用 INT8 主模型 + NVFP4 文本编码器；降到 480P；启用分层卸载 |
+| **ComfyUI 每次重启都要重装** | 把装好的依赖打包成 Dataset 复用（见 ③） |
+| **交互式会话 20 分钟无操作被断** | 长时间生成改用 **Save & Run All（Commit）** 后台跑，输出落 `/kaggle/working` 后下载 |
+| **CUDA 版本不匹配** | Kaggle 为 CUDA 12.x，装 torch 选 `cu121` 及以上，**勿装 cu118** |
+| **忘记开 Internet** | 装依赖必须开联网；挂载 Dataset 本身不需要联网 |
+| **单文件超 50G 上限** | 先 `split` 分片上传，Notebook 里 `cat` 合并到 `/kaggle/working` 再加载 |
+
+> 若坚持用**官方原版 BF16 权重**配合 SGLang / diffusers 部署，显存需求远高于 32G，Kaggle 免费档基本不可行，需改用付费 GPU（如 A100 80G）或本地多卡。
+
 > 再次提醒：请只用于合规、正当的内容创作，遵守 MiniMax H3 社区许可协议与相关法律。
