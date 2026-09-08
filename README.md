@@ -16,27 +16,27 @@
 </p>
 
 <p align="center">
-  <a href="README.md"><strong>English</strong></a> |
-  <a href="README.zh-CN.md">简体中文</a> |
+  <a href="README.en.md">English</a> |
+  <a href="README.md"><strong>简体中文</strong></a> |
   <a href="README.ko.md">한국어</a> |
   <a href="README.ja.md">日本語</a>
 </p>
 
 # MiniMax H3
 
-## Prompt Writing Skill
+## 提示词撰写技巧（Prompt Writing Skill）
 
-Install the H3 prompt writing skill — one of nine skills bundled with this repository:
+安装 H3 提示词撰写技能 —— 本仓库随附的九项技能之一：
 
 ```bash
 npx skills add https://github.com/MiniMax-AI/MiniMax-H3 --skill h3-prompt-writing
 ```
 
-It ships with two prompt guides under `skills/h3-prompt-writing/references/`: `base-en.txt` for text/keyframe modes and `ref-en.txt` for full-reference (Ref2VA) mode.
+它附带两份提示词指南，位于 `skills/h3-prompt-writing/references/`：`base-en.txt` 用于文本/关键帧模式，`ref-en.txt` 用于全参考（Ref2VA）模式。
 
-**Agent compatibility:** `h3-prompt-writing` is a plain Markdown + reference-file skill with no external API calls, so it works in Claude Code, the Claude Agent SDK, Cursor, Windsurf, OpenAI-based agents/Codex, LangChain, or any other harness that can read a `SKILL.md` and local files. The bundled `skills/h3-prompt-writing/agents/openai.yaml` only adds optional UI metadata (display name, description, default prompt) for the ChatGPT/Codex skills UI, per [OpenAI's skill spec](https://learn.chatgpt.com/docs/build-skills) — it does not limit the skill to OpenAI agents.
+**智能体兼容性：** `h3-prompt-writing` 是一个纯 Markdown + 参考文件的技能，不调用任何外部 API，因此可在 Claude Code、Claude Agent SDK、Cursor、Windsurf、基于 OpenAI 的 agents/Codex、LangChain，或任何能读取 `SKILL.md` 与本地文件的 harness 中使用。随附的 `skills/h3-prompt-writing/agents/openai.yaml` 仅为 ChatGPT/Codex 技能界面提供可选的 UI 元数据（显示名、描述、默认提示词），遵循 [OpenAI 的技能规范](https://learn.chatgpt.com/docs/build-skills)——它并不将该技能限定于 OpenAI agents。
 
-The remaining eight are style-specific video generation skills built for the MiniMax Hub's canvas workflow (`hub_generate_video`, `hub_generate_image`, canvas nodes, choice cards, etc.) and are not portable to generic agent harnesses:
+其余八项是面向 MiniMax Hub 画布工作流（`hub_generate_video`、`hub_generate_image`、画布节点、选择卡片等）构建的、特定风格的视频生成技能，无法移植到通用 agent harness：
 
 <table align="center">
   <tr>
@@ -46,151 +46,137 @@ The remaining eight are style-specific video generation skills built for the Min
     <td align="center"><img src="assets/brand-promo-video-generator.gif" alt="brand-promo-video-generator" width="240"><br><a href="skills/brand-promo-video-generator/SKILL.md">brand-promo-video-generator</a></td>
   </tr>
   <tr>
-    <td align="center"><img src="assets/music-video-subtitle-generator.gif" alt="music-video-subtitle-generator"          width="240"><br><a href="skills/music-video-subtitle-generator/SKILL.md">music-video-subtitle-generator</a></td>
+    <td align="center"><img src="assets/music-video-subtitle-generator.gif" alt="music-video-subtitle-generator" width="240"><br><a href="skills/music-video-subtitle-generator/SKILL.md">music-video-subtitle-generator</a></td>
     <td align="center"><img src="assets/co-op-game-intro-generator.gif" alt="co-op-game-intro-generator" width="240"><br><a href="skills/co-op-game-intro-generator/SKILL.md">co-op-game-intro-generator</a></td>
     <td align="center"><img src="assets/paper-collage-explainer-generator.gif" alt="paper-collage-explainer-generator" width="240"><br><a href="skills/paper-collage-explainer-generator/SKILL.md">paper-collage-explainer-generator</a></td>
     <td align="center"><img src="assets/handdrawn-live-video-generator.gif" alt="handdrawn-live-video-generator" width="240"><br><a href="skills/handdrawn-live-video-generator/SKILL.md">handdrawn-live-video-generator</a></td>
   </tr>
 </table>
 
-## Online API
-Use MiniMax-H3 directly via API. 
-- Global: [platform.minimax.io](https://platform.minimax.io/docs/api-reference/video-generation-v2-create) | CN: [platform.minimaxi.com](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-create)
+## 在线 API
 
-## Online App
-Use MiniMax-H3 directly via App.
-- WebApp Global: [hailuoai.video](https://hailuoai.video/tools/minimax-h3) | CN: [hailuoai.com](https://hailuoai.com/)
-- Desktop Global: [hub.minimax.io](https://hub.minimax.io/) | CN: [hub.minimaxi.com](https://hub.minimaxi.com/)
+通过 API 直接使用 MiniMax-H3。
+- 国际版：[platform.minimax.io](https://platform.minimax.io/docs/api-reference/video-generation-v2-create) | 国内版：[platform.minimaxi.com](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-create)
 
+## 在线 App
 
-## System Overview
-MiniMax H3 is a general-purpose, omni-modal generative system. It supports unified understanding of multimodal contexts composed of text, images, video, and audio, and can generate video with native stereo audio at resolutions up to 2K and durations of up to 15 seconds. Thanks to its task-generalization-oriented system design, H3 already possesses broad multimodal context understanding and generation capabilities at the pre-training stage, enabling outstanding performance in following complex multimodal instructions.
+通过 App 直接使用 MiniMax-H3。
+- WebApp 国际版：[hailuoai.video](https://hailuoai.video/tools/minimax-h3) | 国内版：[hailuoai.com](https://hailuoai.com/)
+- 桌面端 国际版：[hub.minimax.io](https://hub.minimax.io/) | 国内版：[hub.minimaxi.com](https://hub.minimaxi.com/)
 
-H3 supports the following input and output specifications:
+## 系统概述
 
-| Category | Specification |
+MiniMax H3 是一套通用的全模态生成系统。它支持对由文本、图像、视频和音频组成的多模态上下文进行统一理解，并能生成最高 2K 分辨率、最长 15 秒、且带有原生立体声的视频。得益于以任务泛化为导向的系统设计，H3 在预训练阶段就已具备广泛的多模态上下文理解与生成能力，在遵循复杂多模态指令时表现出色。
+
+H3 支持以下输入与输出规格：
+
+| 类别 | 规格 |
 |---|---|
-| Output duration | 4–15 seconds |
-| Output aspect ratio | Supports a wide range of aspect ratios, including but not limited to 21:9, 16:9, 4:3, 1:1, 3:4, and 9:16 |
-| Output resolution | Supports various resolution dimensions. The shorter side is set to 768 pixels by default. 2K \| generation can be achieved with H3-Regenerate-2K |
-| Output frame rate | 24 FPS |
-| Output audio | 32 kHz stereo |
-| Supported dialogue languages | Stable support for 11 languages: Arabic, Chinese, English, French, German, Italian, Japanese, Korean, Portuguese, Russian, and Spanish. Additional languages are also supported to varying degrees |
+| 输出时长 | 4–15 秒 |
+| 输出宽高比 | 支持多种宽高比，包括但不限于 21:9、16:9、4:3、1:1、3:4、9:16 |
+| 输出分辨率 | 支持多种分辨率尺寸。默认短边设为 768 像素。2K 分辨率可通过 H3-Regenerate-2K 生成 |
+| 输出帧率 | 24 FPS |
+| 输出音频 | 32 kHz 立体声 |
+| 支持的对白语言 | 稳定支持 11 种语言：阿拉伯语、中文、英语、法语、德语、意大利语、日语、韩语、葡萄牙语、俄语、西班牙语。其它语言也有不同程度的支持 |
 
-### Model Variants and Input Specifications
+### 模型变体与输入规格
 
-| Model Variant | Input Mode | Specifications |
+| 模型变体 | 输入模式 | 规格 |
 |---|---|---|
-| H3-Base-FL2VA | First-and-last-frame mode | Supports zero, one, or two input images. <br><br>- No image input: Text-to-video mode <br>- One image input: First-frame-to-video or last-frame-to-video generation <br>- Two image inputs: First-and-last-frame-to-video generation |
-| H3-Base-Ref2VA | Omni-reference mode | Supports multi-modal reference inputs: <br><br>- **Images:** ≤ 9 images <br>- **Videos:** ≤ 3 clips; each clip must be 2–15 seconds long; total duration ≤ 15 seconds <br>- **Audio:** ≤ 3 clips; each clip must be 2–15 seconds long; total duration ≤ 15 seconds <br>- **Mixed inputs:** Maximum number of files across all input types is 12 |
+| H3-Base-FL2VA | 首帧-末帧模式 | 支持零张、一张或两张输入图像。<br><br>- 无图像输入：文生视频模式<br>- 一张图像输入：首帧生视频或末帧生视频<br>- 两张图像输入：首帧-末帧生视频 |
+| H3-Base-Ref2VA | 全参考模式 | 支持多模态参考输入：<br><br>- **图像：** ≤ 9 张<br>- **视频：** ≤ 3 段；每段须 2–15 秒；总时长 ≤ 15 秒<br>- **音频：** ≤ 3 段；每段须 2–15 秒；总时长 ≤ 15 秒<br>- **混合输入：** 所有输入类型合计文件数最多 12 个 |
 
 ![Image](assets/overview.png)
 
-The complete H3 system consists of the following three modules:
-- H3-Context-IR: As inputs become increasingly complex, we build a dedicated system to deeply understand and refine the input multimodal instructions, then convert them into a form that H3 can readily understand—the Context Intermediate Representation—for generation. **H3-Context-IR is critical to the quality of the final output, so we strongly recommend incorporating it into your generation pipeline or following the “Prompting Guidance” to build your own context-processing system.**
-- H3-Base: Generates audio and video based on the H3-Context-IR output, producing results at 768p resolution.
-- H3-Regenerate-2K: Feeds the 768p result together with the original context back into H3 to regenerate the output at 2K resolution. This process leverages both H3’s powerful generative capabilities and the rich information contained in the original context, enabling it to produce high-resolution outputs with more accurate details and greater visual fidelity.
+完整的 H3 系统由以下三个模块组成：
+- **H3-Context-IR**：随着输入愈发复杂，我们构建了一套专用系统来深度理解并精修输入的多模态指令，再将其转换为 H3 易于理解的形式——上下文中间表示（Context Intermediate Representation）——用于生成。**H3-Context-IR 对最终输出质量至关重要，因此我们强烈建议将其纳入你的生成管线，或遵循"提示词指引"自行构建上下文处理系统。**
+- **H3-Base**：基于 H3-Context-IR 的输出生成音视频，输出 768p 分辨率结果。
+- **H3-Regenerate-2K**：将 768p 结果与原始上下文一起回填进 H3，重新生成 2K 分辨率输出。该过程同时利用了 H3 强大的生成能力与原始上下文中蕴含的丰富信息，从而产出细节更精确、视觉保真度更高的高分辨率结果。
 
-## Model Architecture
+## 模型架构
 
-### H3\-Context\-IR
+### H3-Context-IR
 
-H3\-Context\-IR is a hosted preprocessing and orchestration system designed for free\-form multimodal inputs\.
+H3-Context-IR 是一套面向自由形式多模态输入、托管式的预处理与编排系统。
 
-It interprets the relationships among text, images, audio, and reference videos, as well as how these materials relate to the intended generation output\. Its internal workflow includes instruction parsing, cross\-modal association, temporal understanding, and complex logical reasoning\.
+它解析文本、图像、音频与参考视频之间的关系，以及这些素材与预期生成结果之间的关联。其内部流程包含指令解析、跨模态关联、时序理解与复杂逻辑推理。
 
-H3\-Context\-IR serializes its understanding of the context into a structured representation accepted by H3\-Base\. Without deviating from the user’s original intent, it may also supplement missing or underspecified semantic details where appropriate\.
+H3-Context-IR 将其对上下文的理解序列化成一个 H3-Base 可接收的结构化表示。在不偏离用户原始意图的前提下，它也会在适当处补充缺失或欠明确的语义细节。
 
-Because H3\-Context\-IR relies on a multi\-stage workflow and multiple hosted models and services, it is not included in this open\-source release\. We provide an API that enables users to reproduce the behavior of the official workflow\. We also provide detailed tutorials, and developers can follow the **Prompting Guidance** to build their own preprocessing systems\.
+由于 H3-Context-IR 依赖多阶段流程及多个托管模型与服务，它未包含在本开源版本中。我们提供一套 API，使用户能复现官方流程的行为。我们也提供详细教程，开发者可遵循**提示词指引**自行构建预处理系统。
 
-For detailed usage instructions, see **Recommended Workflow — Full 2K Workflow**\.
+详见**推荐工作流 — 完整 2K 工作流**。
 
-**Safety Guardrails**
+**安全护栏**
 
-User\-submitted text, images and videos, as well as enhanced prompts, are subject to automated moderation\. Content suspected of being unlawful, pornographic, or infringing third\-party rights may be blocked\. We use industry\-standard filtering measures but cannot eliminate false positives or false negatives\. These guardrails do not affect the Licensee’s obligations under the MiniMax H3 Community License, especially those relating to lawful use and use restrictions\.
+用户提交的文本、图像和视频，以及增强后的提示词，都会经过自动化审核。疑似违法、色情或侵犯第三方权利的内容可能被拦截。我们采用业界标准的过滤措施，但无法消除误判（误报/漏报）。这些护栏不影响被许可方在《MiniMax H3 社区许可协议》下的义务，特别是与合法使用和使用限制相关的部分。
 
-### H3\-Base
+### H3-Base
 
 ![Image](assets/full-arch.png)
 
-#### Architecture Overview
+#### 架构概述
 
-- H3\-Base encodes different modalities using their corresponding encoders or VAEs and organizes the encoded representations into a unified packed multimodal sequence\. RoPE is used to capture the necessary spatial and temporal relationships among tokens before the entire sequence is passed to the H3\-Omni\-Transformer\.
+- H3-Base 使用对应的编码器或 VAE 对不同模态进行编码，并将编码后的表示组织为统一的打包多模态序列。在整段序列送入 H3-Omni-Transformer 之前，使用 RoPE 捕获 token 之间必要的时空关系。
+- 具体而言，文本由 H3-Encoder 编码；视觉输入由 H3-Encoder 与 H3-VisualVAE 共同编码；音频仅由 H3-AudioVAE 编码。
+- H3-Omni-Transformer 联合预测视频与音频的潜变量，随后分别解码为视频与立体声音频。
+- 为降低长多模态序列的计算开销，H3 原生支持稀疏注意力训练与推理。首个开源版本仅提供全注意力推理。我们的稀疏注意力实现将在后续更新中发布。
 
-- Specifically, text is encoded by the H3\-Encoder; visual inputs are encoded by both the H3\-Encoder and the H3\-VisualVAE; and audio is encoded solely by the H3\-AudioVAE\.
+#### H3-Encoder
 
-- The H3\-Omni\-Transformer jointly predicts video and audio latents, which are then decoded into video and stereo audio, respectively\.
+- H3-Encoder 使用 Qwen3-VL-32B 的完整预训练权重，并将其第 50 层的隐藏状态提供给 H3-Omni-Transformer。
+- 我们在分词器配置中添加了若干特殊 token，例如 `<d>`。使用 H3 时需要 H3 仓库中提供的分词器及配套配置文件。
 
-- To reduce the computational cost of long multimodal sequences, H3 natively supports sparse\-attention training and inference\. The initial open\-source release provides inference with full attention only\. Our sparse\-attention implementation will be released in a future update\.
+#### H3-VAE
 
-#### H3\-Encoder
+H3 使用相互独立的视觉与音频潜变量来分别表示各自模态。
 
-- The H3\-Encoder uses the full pretrained weights of Qwen3\-VL\-32B and provides the hidden states from its 50th layer to the H3\-Omni\-Transformer\.
+##### H3-VisualVAE
 
-- We add several special tokens, such as `<d>`, to the tokenizer configuration\. When using H3, the tokenizer and associated configuration files provided in the H3 repository are required\.
+- H3-VisualVAE 是一个时间因果的视频自编码器，空间压缩因子 16×、时间压缩因子 4×、24 个潜通道，记作 f16t4d24。我们应用了多种潜空间优化技术，在提升重建质量的同时改善潜变量的可学习性。
+- 在送入 H3-Omni-Transformer 之前，视觉潜变量会沿 `(时间, 高, 宽)` 维度以 `1 × 2 × 2` 的 patch 尺寸进一步分块（patchify）。因此进入 Transformer 的视觉 token 有效空间下采样因子为 32×，而时间下采样因子仍为 4×。
+- H3-VisualVAE 的潜空间同时针对重建质量与生成模型的可学习性进行了优化。在训练完编码器后，我们还额外训练了一个基于 ViT 的解码器，以降低解码开销并进一步提升重建质量。
 
-#### H3\-VAE
+##### H3-AudioVAE
 
-H3 uses separate visual and audio latents to represent their respective modalities\.
+- H3-AudioVAE 对左右两个音频声道使用相同的编码器与解码器，但各自独立处理。解码后的声道随后重新组合，从而实现立体声音频的输入与输出。
+- 对每个声道，H3-AudioVAE 将 32 kHz 音频压缩为时间速率 40 Hz 的潜 token 序列。
+- 受 VA-VAE 启发，我们优化潜空间以在保留音频重建质量的同时，使其更易于被生成模型学习。
 
-##### H3\-VisualVAE
+#### H3-Omni-Transformer
 
-- H3\-VisualVAE is a temporally causal video autoencoder with a spatial compression factor of 16×, a temporal compression factor of 4×, and 24 latent channels, denoted as f16t4d24\. We apply several latent\-space optimization techniques to jointly improve reconstruction quality and latent learnability\.
-
-- Before being passed to the H3\-Omni\-Transformer, the visual latents are further patchified with a patch size of `1 × 2 × 2` along the `(time, height, width)` dimensions\. As a result, the visual tokens entering the Transformer have an effective spatial downsampling factor of 32×, while the temporal downsampling factor remains 4×\.
-
-- The latent space of H3\-VisualVAE is optimized for both reconstruction quality and ease of learning by the generative model\. After training its encoder, we additionally train a ViT\-based decoder to reduce decoding costs and further improve reconstruction quality\.
-
-##### H3\-AudioVAE
-
-- H3-AudioVAE uses the same encoder and decoder for both the left and right audio channels while processing each channel independently. The decoded channels are then recombined, enabling stereo audio input and output.
-- For each channel, H3-AudioVAE compresses 32 kHz audio into a sequence of latent tokens with a temporal rate of 40 Hz.
-- Inspired by VA-VAE, we optimize the latent space to preserve audio reconstruction quality while making it easier for the generative model to learn.
-
-#### H3\-Omni\-Transformer
-
-- For scalability and generalization, we adopt a relatively simple Transformer block design\. H3\-Omni\-Transformer is a 33B\-parameter dense, single\-stream Transformer, with approximately 13B parameters residing in AdaLN\-related branches\. Because the AdaLN modulation outputs can be precomputed and cached, these parameters do not need to be loaded for inference\-only deployment\. We release the complete model weights to support further development, including fine\-tuning\.
-
-- Neither the attention layers nor the FFN layers contain modality\-specific structures\. Modality\-specific parameters are confined to the input/output layers and the AdaLN branches\. In particular, modality\-specific AdaLN improves generation quality with relatively low additional training and inference costs\.
-
-- The model uses three\-dimensional Multimodal Rotary Position Embeddings \(MM\-RoPE\) to represent positional relationships across the temporal and two spatial dimensions, `(t, h, w)`\.
-
-- During the final stage of training, we introduce native sparse attention to reduce the computational cost of long sequences\. The sparse\-attention implementation is not included in the initial open\-source release and will be published separately in a future update\.
-
-    
+- 为兼顾可扩展性与泛化能力，我们采用了相对简洁的 Transformer 块设计。H3-Omni-Transformer 是一个 33B 参数的稠密、单流 Transformer，其中约 13B 参数位于 AdaLN 相关分支中。由于 AdaLN 调制输出可预计算并缓存，推理部署时无需加载这些参数。我们发布完整模型权重以支持进一步开发，包括微调。
+- 注意力层与 FFN 层均不含模态专属结构。模态专属参数仅限于输入/输出层与 AdaLN 分支。特别地，模态专属的 AdaLN 以较低的额外训练与推理开销提升了生成质量。
+- 模型使用三维多模态旋转位置嵌入（MM-RoPE）来表示跨越时间与两个空间维度 `(t, h, w)` 的位置关系。
+- 在训练的最后阶段，我们引入了原生稀疏注意力以降低长序列的计算开销。稀疏注意力实现未包含在首个开源版本中，将在后续更新中单独发布。
 
 ### H3-Regenerate-2K
 
-- For H3's 2K\-resolution output, instead of using a conventional dedicated super\-resolution module, we use the H3 base model to regenerate its own low\-resolution result through an in\-context manner\.
+- 对于 H3 的 2K 分辨率输出，我们没有使用传统的专用超分模块，而是采用 H3 基础模型，以"上下文内（in-context）"方式重新生成其自身的低分辨率结果。
+- 该方法有两个优势：（1）重生成过程能最大程度复用 H3 基础模型的生成能力；（2）上下文内格式能在产出高分辨率结果时复用原始多模态上下文，从而恢复出传统超分方法不得不"猜测"的信息，例如小文字与精细细节。
+- 上下文内重生成也是任务泛化的一个例证。
+- **由于系统复杂度较高，该模块尚未开源。待准备就绪后将予以发布。** 我们提供一套 API 用于验证官方结果；见下方"完整 2K 工作流"。
 
-- This approach provides two advantages: \(1\) the regeneration process can reuse the generative capabilities of H3 base model to the greatest extent possible; and \(2\) the in\-context format can reuse the original multimodal context when producing high\-resolution output, allowing it to recover information that conventional super\-resolution methods would otherwise have to “guess,” such as small text and fine details\.
+## 推荐工作流
 
-- In\-context regeneration is also an example of task generalization\.
+为帮助社区正确部署 MiniMax H3，我们提供两种验证方式。
 
-- **Due to the complexity of the system, this module is not yet open\-sourced\. We will release it once it is ready\.** We provide an API for validating the official results; see "Full 2K Workflow" below\.
+由于完整的 H3 系统由三个模块组成——H3-Context-IR、H3-Base 与 H3-Regenerate-2K——"完整 2K 工作流"通过结合开放平台 API 与本地部署的 H3-Base，提供了一条面向 2K 输出的端到端验证管线。"本地部署 H3-Base"章节则提供一种仅用本地部署的 H3-Base 验证 768p 输出的方法。
 
+此外，"提示词指引"章节提供了详细教程，帮助社区开发自己的提示词系统。
 
+### 本地部署 H3-Base
 
-## Recommended Workflow
+MiniMax H3 以两个面向特定任务的检查点形式发布。每个检查点包含一个专用的 Omni Transformer 模型，以及所需的 processor、tokenizer、文本编码器、Visual VAE 与独立的 Audio VAE 组件。
 
-To help the community deploy MiniMax H3 correctly, we provide two validation methods\.
-
-Since the complete H3 system consists of three modules—H3\-Context\-IR, H3\-Base, and H3\-Regenerate\-2K—the “Full 2K Workflow” provides an end\-to\-end validation pipeline for 2K output, combining the Open Platform API with a locally deployed H3\-Base\. The “Local Deployment of H3\-Base” section provides a method for validating 768p output using only a locally deployed H3\-Base\.
-
-In addition, the “Prompting Guidance” section provides a detailed tutorial to help the community develop their own prompting systems\.
-
-### Local Deployment of H3\-Base
-
-MiniMax H3 is released as two task\-specific checkpoints\. Each checkpoint contains a specialized Omni Transformer Model together with the required processor, tokenizer, text encoder, Visual VAE, and standalone Audio VAE components\.
-
-|Checkpoint|Supported Tasks|Input Conditions|Output|Precision|
+| 检查点 | 支持任务 | 输入条件 | 输出 | 精度 |
 |---|---|---|---|---|
-|MiniMax\-H3 Base FL2VA|Text\-to\-Audio\-Video \(`t2va`\), First/Last\-Frame\-to\-Audio\-Video \(`fl2va`\)|Text; optional first frame, last frame, or both|Video and audio|BF16|
-|MiniMax\-H3 Base Ref2VA|Reference\-to\-Audio\-Video \(`ref2va`\)|Text with reference images, videos, and/or audio|Video and audio|BF16|
+| MiniMax-H3 Base FL2VA | 文生音视频（`t2va`）、首/末帧生音视频（`fl2va`） | 文本；可选首帧、末帧或二者皆有 | 视频与音频 | BF16 |
+| MiniMax-H3 Base Ref2VA | 参考生音视频（`ref2va`） | 带参考图像、视频和/或音频的文本 | 视频与音频 | BF16 |
 
-The released checkpoints are CFG-distilled Omni Transformer model weights. 
+发布的检查点为 CFG 蒸馏后的 Omni Transformer 模型权重。
 
-Each checkpoint is distributed as a self\-contained Hugging Face\-style repository with the following components:
+每个检查点作为一个自包含的 Hugging Face 风格仓库分发，包含以下组件：
 
 ```text
 <TASK>/
@@ -203,35 +189,32 @@ Each checkpoint is distributed as a self\-contained Hugging Face\-style reposito
 └── audio_vae/
 ```
 
-Download the model. The repository hosts the original checkpoint (`FL2VA/`, `Ref2VA/`) and the diffusers format side by side, so scope the download to what your framework needs:
+下载模型。仓库并列托管了原始检查点（`FL2VA/`、`Ref2VA/`）与 diffusers 格式，因此请按需限定下载范围：
 
-`model_index.json` is the repository-level public entry. The task-family-specific diffusers indexes remain under `FL2VA/model_index.json` and `Ref2VA/model_index.json`.
+`model_index.json` 是仓库级的公共入口。任务族特定的 diffusers 索引仍位于 `FL2VA/model_index.json` 与 `Ref2VA/model_index.json`。
 
 ```bash
-# Original checkpoint, both task families (SGLang, vLLM):
+# 原始检查点，两个任务族（SGLang、vLLM）：
 hf download MiniMaxAI/MiniMax-H3 --include "model_index.json" "FL2VA/*" "Ref2VA/*" --local-dir MiniMax-H3
 
-# Or a single task family:
+# 或仅单个任务族：
 hf download MiniMaxAI/MiniMax-H3 --include "model_index.json" "FL2VA/*" --local-dir MiniMax-H3
 ```
 
-diffusers users do not need a manual download: `ModularPipeline.from_pretrained("MiniMaxAI/MiniMax-H3")` fetches exactly the components it needs. See the [diffusers documentation](https://github.com/huggingface/diffusers/blob/minimax-h3/docs/source/en/api/pipelines/minimax_h3.md) for loading recipes.
+diffusers 用户无需手动下载：`ModularPipeline.from_pretrained("MiniMaxAI/MiniMax-H3")` 会精确获取所需组件。加载方式参见 [diffusers 文档](https://github.com/huggingface/diffusers/blob/minimax-h3/docs/source/en/api/pipelines/minimax_h3.md)。
 
-We recommend the following inference frameworks to serve the model:
+我们推荐以下推理框架来服务该模型：
 
-- [SGLang](https://docs.sglang.io/) \- see [cookbook](https://docs.sglang.io/cookbook/diffusion/MiniMax/MiniMax-H3) 
+- [SGLang](https://docs.sglang.io/) - 参见 [cookbook](https://docs.sglang.io/cookbook/diffusion/MiniMax/MiniMax-H3)
+- [vLLM](https://github.com/vllm-project/vllm) - 参见 [vllm recipes](https://recipes.vllm.ai/MiniMaxAI/MiniMax-H3)
+- [diffusers](https://github.com/huggingface/diffusers) - 参见 [diffusers 文档](https://github.com/huggingface/diffusers/blob/minimax-h3/docs/source/en/api/pipelines/minimax_h3.md)
+- [ComfyUI](https://github.com/Comfy-Org/ComfyUI) - 参见 [Comfy 教程](https://docs.comfy.org/tutorials/video/minimax/minimax-h3)；使用 [R2V 模板](https://github.com/Comfy-Org/workflow_templates/blob/main/templates/video_minimax_h3_r2v.json) / [T2V 模板](https://github.com/Comfy-Org/workflow_templates/blob/main/templates/video_minimax_h3_t2v.json)
 
-- [vLLM](https://github.com/vllm-project/vllm) \- see [vllm recipes](https://recipes.vllm.ai/MiniMaxAI/MiniMax-H3)
+#### Sglang 部署
 
-- [diffusers](https://github.com/huggingface/diffusers) \- see [diffusers docs](https://github.com/huggingface/diffusers/blob/minimax-h3/docs/source/en/api/pipelines/minimax_h3.md)
+此处以 sglang 作为部署示例。更多部署配置参见 [MiniMax-H3 部署指南](https://docs.sglang.io/cookbook/diffusion/MiniMax/MiniMax-H3#3-serve-minimax-h3)。
 
-- [ComfyUI](https://github.com/Comfy-Org/ComfyUI) \- see  [Comfy tutorial](https://docs.comfy.org/tutorials/video/minimax/minimax-h3); use [R2V template](https://github.com/Comfy-Org/workflow_templates/blob/main/templates/video_minimax_h3_r2v.json) / [T2V template](https://github.com/Comfy-Org/workflow_templates/blob/main/templates/video_minimax_h3_t2v.json)
-
-#### Sglang Deployment
-
-Here we use sglang as a deployment example\. See the [MiniMax\-H3 deployment guide](https://docs.sglang.io/cookbook/diffusion/MiniMax/MiniMax-H3#3-serve-minimax-h3) for additional deployment configurations\.
-
-FL2VA:
+FL2VA：
 
 ```bash
 sglang serve \
@@ -244,7 +227,7 @@ sglang serve \
   --model-variant fl2va
 ```
 
-Ref2VA:
+Ref2VA：
 
 ```bash
 sglang serve \
@@ -257,19 +240,19 @@ sglang serve \
   --model-variant ref2va
 ```
 
-#### Reproducible 768p cases
+#### 可复现的 768p 案例
 
-The following three use cases T2VA, FL2VA, and Ref2VA demonstrate how to reproduce MiniMax\-H3 video\-audio generation\.
+以下 T2VA、FL2VA 与 Ref2VA 三个用例演示了如何复现 MiniMax-H3 的视频-音频生成。
 
-| Use case | Request | Result |
+| 用例 | 请求 | 结果 |
 |---|---|---|
-| T2VA | [View script](scripts/readme/reproducible-768p-t2va-request.sh) | [t2va.mp4](assets/t2va.mp4) |
-| FL2VA | [View script](scripts/readme/reproducible-768p-fl2va-request.sh) | [fl2va.mp4](assets/fl2va.mp4) |
-| Ref2VA | [View script](scripts/readme/reproducible-768p-ref2va-request.sh) | [ref2va.mp4](assets/ref2va.mp4) |
+| T2VA | [查看脚本](scripts/readme/reproducible-768p-t2va-request.sh) | [t2va.mp4](assets/t2va.mp4) |
+| FL2VA | [查看脚本](scripts/readme/reproducible-768p-fl2va-request.sh) | [fl2va.mp4](assets/fl2va.mp4) |
+| Ref2VA | [查看脚本](scripts/readme/reproducible-768p-ref2va-request.sh) | [ref2va.mp4](assets/ref2va.mp4) |
 
-#### Using a local image/video instead of a remote URL
+#### 使用本地图片/视频代替远程 URL
 
-The reproducible scripts above reference `conditions[].uri` values hosted on a public CDN so they work out of the box, but `uri` is not limited to `http(s)://`. For local testing you can point it at a `file://` path instead — for example, to swap the FL2VA keyframe for your own image:
+上述可复现脚本引用了托管在公共 CDN 上的 `conditions[].uri` 值，因此开箱即用，但 `uri` 并不限于 `http(s)://`。本地测试时可将其指向 `file://` 路径——例如，把 FL2VA 的关键帧换成你自己的图片：
 
 ```json
 "conditions": [
@@ -282,171 +265,238 @@ The reproducible scripts above reference `conditions[].uri` values hosted on a p
 ]
 ```
 
-The path is resolved by the SGLang server process, not by the machine running `curl`, so it must point to a file the server can actually see:
+该路径由 SGLang 服务端进程解析，而非运行 `curl` 的机器，因此它必须指向服务端实际可见的文件：
 
-- If `sglang serve` runs natively on the host, any absolute path readable by that process works.
-- If it runs in a container, the file must live inside a directory you mounted into the container (e.g. mount a host folder to `/data/minimax-h3` and reference `file:///data/minimax-h3/...`).
+- 若 `sglang serve` 原生运行在宿主机上，该进程可读的任何绝对路径均可。
+- 若在容器中运行，文件必须位于你挂载进容器的目录内（例如将宿主机文件夹挂载到 `/data/minimax-h3`，并引用 `file:///data/minimax-h3/...`）。
 
-See the [MiniMax-H3 SGLang cookbook](https://docs.sglang.io/cookbook/diffusion/MiniMax/MiniMax-H3) for the full list of supported condition/media options.
+完整受支持的 condition/media 选项列表参见 [MiniMax-H3 SGLang cookbook](https://docs.sglang.io/cookbook/diffusion/MiniMax/MiniMax-H3)。
 
-### Full 2K Workflow
+### 完整 2K 工作流
 
-This section explains how to combine a locally deployed SGLang service with the official **H3\-Context\-IR** and **H3\-Regenerate\-2K** APIs to reproduce the quality of 2K videos generated directly by the MiniMax API\.
-Before you begin, configure the SGLang endpoint and your MiniMax API credentials:
+本节讲解如何组合本地部署的 SGLang 服务与官方 **H3-Context-IR**、**H3-Regenerate-2K** API，以复现由 MiniMax API 直接生成的 2K 视频质量。开始之前，请先配置 SGLang 端点与你的 MiniMax API 凭据：
 
 ```bash
-# URL of your SGLang deployment
+# 你的 SGLang 部署地址
 SGLANG_DEPLOYMENT_URL="<sglang-deployment-url>"
 
-# MiniMax API endpoint (choose one)
-# CN
+# MiniMax API 端点（二选一）
+# 国内版
 MINIMAX_API_BASE="https://api.minimaxi.com"
-# Global
+# 国际版
 # MINIMAX_API_BASE="https://api.minimax.io"
 
-# API token obtained from the MiniMax platform
+# 从 MiniMax 平台获取的 API token
 TOKEN="<token>"
 ```
 
-MiniMax platform:
+MiniMax 平台：
 
-API docs:
-- Create H3-2K: use /video-generation-v2-create [EN-docs](https://platform.minimax.io/docs/api-reference/video-generation-v2-create), [CN-docs](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-create)
-- H3-Context-IR：use /video-generation-v2-h3-context-ir [EN-docs](https://platform.minimax.io/docs/api-reference/video-generation-v2-h3-context-ir), [CN-docs](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-h3-context-ir)
-- H3-Regenerate-2K：use /video-generation-v2-regeneration [EN-docs](https://platform.minimax.io/docs/api-reference/video-generation-v2-regeneration), [CN-docs](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-regeneration)
+API 文档：
+- 创建 H3-2K：使用 /video-generation-v2-create [EN 文档](https://platform.minimax.io/docs/api-reference/video-generation-v2-create) / [CN 文档](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-create)
+- H3-Context-IR：使用 /video-generation-v2-h3-context-ir [EN 文档](https://platform.minimax.io/docs/api-reference/video-generation-v2-h3-context-ir) / [CN 文档](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-h3-context-ir)
+- H3-Regenerate-2K：使用 /video-generation-v2-regeneration [EN 文档](https://platform.minimax.io/docs/api-reference/video-generation-v2-regeneration) / [CN 文档](https://platform.minimaxi.com/docs/api-reference/video-generation-v2-regeneration)
 
+下方各示例将本地 H3-Base 输出文件编码为 Base64 Data URL。生产环境建议将视频上传到公开可访问的 URL，并将该 URL 作为 `base_video` 传入。
 
-The examples below encode local H3\-Base output files as Base64 Data URLs\. For production use, uploading the video to a publicly accessible URL and passing that URL as `base_video` is recommended\.
+对于每个用例，我们均提供通过开放平台 API 直接生成的 2K 与 768p 参考输出，便于校验结果。
 
-For each case below, we provide reference outputs at both 2K and 768p generated directly through the Open Platform API, making it easier to validate the results\.
+#### case-T2VA
 
-#### case\-T2VA
-
-- Type: Text-to-video
-- Duration: 10 seconds
-- Aspect ratio: 16:9
-
-<table>
-  <thead>
-    <tr><th>stage</th><th>request</th><th>result</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>H3-Context-IR</td><td><a href="scripts/readme/full-2k-t2va-h3-context-ir.sh">View script</a></td><td><pre><code class="language-json">{
-  &quot;task&quot;: {
-    &quot;id&quot;: &quot;&lt;task_id&gt;&quot;,
-    &quot;model&quot;: &quot;MiniMax-H3&quot;,
-    &quot;status&quot;: &quot;succeeded&quot;,
-    &quot;created_at&quot;: &quot;&lt;created_at&gt;&quot;,
-    &quot;updated_at&quot;: &quot;&lt;updated_at&gt;&quot;,
-    &quot;content&quot;: {
-      &quot;prompt&quot;: &quot;integrated_multimodal_description: [Shot 1] Cinematic, medium wide shot, pushing in slowly. In the cavernous, dimly lit bridge of a starship, sleek metallic consoles with glowing amber displays flank a massive, curved observation window. A female captain, in her late 40s with an athletic build and short silver-streaked black hair, stands in the center midground. She wears a structured, high-collared dark navy military tunic with silver chest insignias. Her back is to the camera, silhouetted against the cool, ambient starlight pouring through the thick glass. She stands perfectly still with her hands clasped tightly behind her back. Outside the window, a massive armada of jagged, dark grey dreadnoughts hovers in tight formation against a deep purple space nebula. The fleet&#39;s massive rear thrusters begin to glow with an intense, escalating bright blue light. [Shot 2] At 00:04.500, the camera cuts to a close-up of the captain&#39;s face and shakes strongly. The brilliant blue-white light from the fleet&#39;s gathering energy reflects vividly in her dark eyes. Suddenly, a blinding white flash floods through the window, completely washing out the background as the fleet jumps to hyperspace. The sheer spatial force violently jolts the bridge, causing the captain from Shot 1 to stagger slightly forward, her shoulders tensing as she visibly braces herself against the physical tremors. As the intense white light fades abruptly, leaving only the dim, empty expanse of the purple nebula reflected on her starkly lit skin, her jaw clenches, and she slowly closes her eyes in the newly emptied space.\noverall_soundscape: A low, resonant hum of the ship&#39;s ambient life support systems serves as the baseline, soon drowned out by an audible, escalating, high-pitched electronic whine as the fleet outside charges its hyperdrives. A massive, deafening, bass-heavy boom and sharp crackle erupts during the blinding flash, accompanied by the loud metallic creaking, rattling, and deep thuds of the bridge&#39;s bulkheads vibrating under immense physical stress. The intense roaring impact then cuts abruptly back to a hollow, echoing room tone, leaving only the faint, steady hum of the isolated bridge.\nnon_diegetic_music: Cinematic space-opera orchestral score, slow tempo, featuring a solitary, mournful French horn melody over deep, sustained string dissonances that build rapidly in volume and intensity, swelling to a massive orchestral peak before snapping immediately into silence right after the jump.&quot;
-    },
-    &quot;duration&quot;: 10,
-    &quot;usage&quot;: {
-      &quot;total_tokens&quot;: 8565,
-      &quot;prompt_tokens&quot;: 5650,
-      &quot;completion_tokens&quot;: 2915
-    },
-    &quot;ratio&quot;: &quot;16:9&quot;,
-    &quot;task_type&quot;: &quot;h3_context_ir&quot;,
-    &quot;modality&quot;: &quot;text&quot;
-  }
-}</code></pre></td></tr>
-    <tr><td>H3-Base</td><td><a href="scripts/readme/full-2k-t2va-h3-base.sh">View script</a></td><td><a href="assets/t2va.mp4">t2va.mp4</a></td></tr>
-    <tr><td>H3-Regenerate-2K</td><td><a href="scripts/readme/full-2k-t2va-h3-regenerate-2k.sh">View script</a></td><td><a href="assets/t2va_2k.mp4">t2va_2k.mp4</a></td></tr>
-    <tr><td>Reference 2K result by directly calling Open Platform API</td><td><a href="scripts/readme/full-2k-t2va-reference-2k-result-by-directly-calling-open-platform-api.sh">View script</a></td><td><a href="assets/h3_direct_2k.mp4">h3_direct_2k.mp4</a></td></tr>
-    <tr><td>Reference 768P result by directly calling Open Platform API</td><td><a href="scripts/readme/full-2k-t2va-reference-768p-result-by-directly-calling-open-platform-api.sh">View script</a></td><td><a href="assets/h3_direct_768p.mp4">h3_direct_768p.mp4</a><br></td></tr>
-  </tbody>
-</table>
-
-#### case\-I2VA
-
-- Type: First-frame image-to-video
-- Duration: 8 seconds
-- Aspect ratio: adaptive
+- 类型：文本生视频
+- 时长：10 秒
+- 宽高比：16:9
 
 <table>
   <thead>
-    <tr><th>stage</th><th>request</th><th>result</th></tr>
+    <tr><th>阶段</th><th>请求</th><th>结果</th></tr>
   </thead>
   <tbody>
-    <tr><td>H3-Context-IR</td><td><a href="scripts/readme/full-2k-i2va-h3-context-ir.sh">View script</a></td><td><pre><code class="language-json">{
-  &quot;task&quot;: {
-    &quot;id&quot;: &quot;&lt;task_id&gt;&quot;,
-    &quot;model&quot;: &quot;MiniMax-H3&quot;,
-    &quot;status&quot;: &quot;succeeded&quot;,
-    &quot;created_at&quot;: &quot;&lt;created_at&gt;&quot;,
-    &quot;updated_at&quot;: &quot;&lt;updated_at&gt;&quot;,
-    &quot;content&quot;: {
-      &quot;prompt&quot;: &quot;For the target video, at 0.00 seconds into the target video, &lt;Picture 1&gt; (from [Shot 1]) is fully referenced.\n\nintegrated_multimodal_description: [Shot 1] This is a live-action, cinematic shot with a shallow depth of field. The camera holds a perfectly static shot throughout the entire eight-second duration, capturing a cozy family gathering in a traditional Japanese dining room. The scene opens with a large, intricately patterned blue and white ceramic bowl of ramen in the immediate foreground, rendered in crisp, sharp focus. The bowl sits on a smooth, polished long wooden table. Inside the bowl, a rich, oily golden-brown broth surrounds yellow wavy noodles, topped with two thick, round slices of chashu pork featuring visible fat marbling and a distinct spiral meat pattern. A generous mound of freshly chopped, bright green scallions rests in the center, and a crisp, dark green rectangular sheet of nori seaweed is tucked into the right edge. To the left of the bowl, a pair of light brown wooden chopsticks rests horizontally on a small, dark rectangular chopstick rest, near a small cylindrical ceramic teacup with blue painted patterns. On the right side of the table, a spherical paper lantern with a ribbed bamboo frame sits on a black wooden base. In the background, a large family of seven is gathered around the table, initially appearing as a soft, blurred presence. Behind them, traditional Japanese sliding shoji screens with wooden lattice frames are open, revealing a bright outdoor scene with lush green trees. Early in the clip, the thick, white steam rising from the hot ramen broth immediately intensifies, billowing upwards in thick, swirling clouds that dance continuously above the bowl. As the clip progresses into the middle seconds, the camera maintains its static position while the focus begins a deliberate, smooth shift deeper into the room. The foreground ramen bowl, its vibrant ingredients, and the rising steam gradually soften into a hazy, out-of-focus blur. Simultaneously, the family members in the background come into sharp, detailed clarity. The heavy steam continues to rise from the foreground, creating a dynamic, translucent veil between the camera and the family. With the focus now firmly locked on the background, the vibrant family dinner comes alive. The man in the dark navy blue long-sleeved shirt on the left leans forward, his mouth moving animatedly in a silent exchange. The young girl in the crisp white short-sleeved t-shirt beside him smiles brightly, looking toward the center of the table. The woman on the far left, wearing a soft light blue long-sleeved blouse, turns her head slightly, smiling gently. Across the table, the woman in the light grey button-down shirt smiles broadly, her eyes crinkling, as she rests her hands near her plate. The woman in the dark grey top further back uses her wooden chopsticks to pick up a small piece of food from a central ceramic dish filled with bright red pickled vegetables. The woman in the center back in the light grey sweater smiles gently, her hands clasped softly in front of her, observing the interaction. Throughout the remainder of the clip, the family continues their lively physical interaction, their mouths moving in continuous, silent cadences of conversation, while the thick, white steam from the blurred ramen bowl in the foreground never stops rising, adding a comforting atmosphere to the warm gathering.\n\noverall_soundscape: The soundscape begins with a quiet room tone mixed with the faint, airy rustle of the thick steam billowing from the hot ramen bowl in the foreground, accompanied by the subtle, continuous hissing and bubbling of the rich broth. As the visual focus shifts deeper into the room, the physical sounds of the bustling family dinner become dominant in the foreground. The clear, sharp clinking of ceramic bowls and wooden chopsticks touching plates is clearly heard as the family members reach for food. This is followed by the faint, muffled thud of a cup being set down on the smooth wooden table, and the subtle, rhythmic rustle of cotton and wool clothing as the family members lean forward and gesture, perfectly capturing the lively, physical atmosphere of the shared meal.\n\nnon_diegetic_music: A gentle, heartwarming acoustic guitar melody plays softly in the background, accompanied by the subtle, resonant notes of a traditional Japanese koto. The music maintains a slow, comforting tempo that enhances the cozy, nostalgic, and joyful atmosphere of the family gathering.&quot;
+    <tr><td>H3-Context-IR</td><td><a href="scripts/readme/full-2k-t2va-h3-context-ir.sh">查看脚本</a></td><td><pre><code class="language-json">{
+  "task": {
+    "id": "&lt;task_id&gt;",
+    "model": "MiniMax-H3",
+    "status": "succeeded",
+    "created_at": "&lt;created_at&gt;",
+    "updated_at": "&lt;updated_at&gt;",
+    "content": {
+      "prompt": "integrated_multimodal_description: [Shot 1] Cinematic, medium wide shot, pushing in slowly. In the cavernous, dimly lit bridge of a starship, sleek metallic consoles with glowing amber displays flank a massive, curved observation window. A female captain, in her late 40s with an athletic build and short silver-streaked black hair, stands in the center midground. She wears a structured, high-collared dark navy military tunic with silver chest insignias. Her back is to the camera, silhouetted against the cool, ambient starlight pouring through the thick glass. She stands perfectly still with her hands clasped tightly behind her back. Outside the window, a massive armada of jagged, dark grey dreadnoughts hovers in tight formation against a deep purple space nebula. The fleet's massive rear thrusters begin to glow with an intense, escalating bright blue light. [Shot 2] At 00:04.500, the camera cuts to a close-up of the captain's face and shakes strongly. The brilliant blue-white light from the fleet's gathering energy reflects vividly in her dark eyes. Suddenly, a blinding white flash floods through the window, completely washing out the background as the fleet jumps to hyperspace. The sheer spatial force violently jolts the bridge, causing the captain from Shot 1 to stagger slightly forward, her shoulders tensing as she visibly braces herself against the physical tremors. As the intense white light fades abruptly, leaving only the dim, empty expanse of the purple nebula reflected on her starkly lit skin, her jaw clenches, and she slowly closes her eyes in the newly emptied space.\noverall_soundscape: A low, resonant hum of the ship's ambient life support systems serves as the baseline, soon drowned out by an audible, escalating, high-pitched electronic whine as the fleet outside charges its hyperdrives. A massive, deafening, bass-heavy boom and sharp crackle erupts during the blinding flash, accompanied by the loud metall... [truncated]
     },
-    &quot;duration&quot;: 8,
-    &quot;usage&quot;: {
-      &quot;total_tokens&quot;: 22822,
-      &quot;prompt_tokens&quot;: 12800,
-      &quot;completion_tokens&quot;: 10022
+    "duration": 10,
+    "usage": {
+      "total_tokens": 8565,
+      "prompt_tokens": 5650,
+      "completion_tokens": 2915
     },
-    &quot;ratio&quot;: &quot;16:9&quot;,
-    &quot;task_type&quot;: &quot;h3_context_ir&quot;,
-    &quot;modality&quot;: &quot;text&quot;
+    "ratio": "16:9",
+    "task_type": "h3_context_ir",
+    "modality": "text"
   }
 }</code></pre></td></tr>
-    <tr><td>H3-Base</td><td><a href="scripts/readme/full-2k-i2va-h3-base.sh">View script</a></td><td><a href="assets/i2va.mp4">i2va.mp4</a></td></tr>
-    <tr><td>H3-Regenerate-2K</td><td><a href="scripts/readme/full-2k-i2va-h3-regenerate-2k.sh">View script</a></td><td><a href="assets/i2va_2k.mp4">i2va_2k.mp4</a><br></td></tr>
-    <tr><td>Reference 2K result by directly calling Open Platform API</td><td><a href="scripts/readme/full-2k-i2va-reference-2k-result-by-directly-calling-open-platform-api.sh">View script</a></td><td><a href="assets/i2va_direct_2k.mp4">i2va_direct_2k.mp4</a></td></tr>
-    <tr><td>Reference 768P result by directly calling Open Platform API</td><td><a href="scripts/readme/full-2k-i2va-reference-768p-result-by-directly-calling-open-platform-api.sh">View script</a></td><td><a href="assets/i2va_direct_768p.mp4">i2va_direct_768p.mp4</a></td></tr>
+    <tr><td>H3-Base</td><td><a href="scripts/readme/full-2k-t2va-h3-base.sh">查看脚本</a></td><td><a href="assets/t2va.mp4">t2va.mp4</a></td></tr>
+    <tr><td>H3-Regenerate-2K</td><td><a href="scripts/readme/full-2k-t2va-h3-regenerate-2k.sh">查看脚本</a></td><td><a href="assets/t2va_2k.mp4">t2va_2k.mp4</a></td></tr>
+    <tr><td>直接调用开放平台 API 得到的参考 2K 结果</td><td><a href="scripts/readme/full-2k-t2va-reference-2k-result-by-directly-calling-open-platform-api.sh">查看脚本</a></td><td><a href="assets/h3_direct_2k.mp4">h3_direct_2k.mp4</a></td></tr>
+    <tr><td>直接调用开放平台 API 得到的参考 768P 结果</td><td><a href="scripts/readme/full-2k-t2va-reference-768p-result-by-directly-calling-open-platform-api.sh">查看脚本</a></td><td><a href="assets/h3_direct_768p.mp4">h3_direct_768p.mp4</a><br></td></tr>
   </tbody>
 </table>
 
-#### case\-Ref2VA
+#### case-I2VA
 
-- Type: Multimodal reference-to-video (video + audio)
-- Duration: 5 seconds
-- Aspect ratio: adaptive
+- 类型：首帧图生视频
+- 时长：8 秒
+- 宽高比：自适应
 
 <table>
   <thead>
-    <tr><th>stage</th><th>request</th><th>result</th></tr>
+    <tr><th>阶段</th><th>请求</th><th>结果</th></tr>
   </thead>
   <tbody>
-    <tr><td>H3-Context-IR</td><td><a href="scripts/readme/full-2k-ref2va-h3-context-ir.sh">View script</a></td><td><pre><code class="language-json">{
-  &quot;task&quot;: {
-    &quot;id&quot;: &quot;&lt;task_id&gt;&quot;,
-    &quot;model&quot;: &quot;MiniMax-H3&quot;,
-    &quot;status&quot;: &quot;succeeded&quot;,
-    &quot;created_at&quot;: &quot;&lt;created_at&gt;&quot;,
-    &quot;updated_at&quot;: &quot;&lt;updated_at&gt;&quot;,
-    &quot;content&quot;: {
-      &quot;prompt&quot;: &quot;subject_definitions:\n&lt;Subject 1&gt; is the young man with short wavy blonde hair, wearing a bright pink suit jacket, matching pink trousers, an unbuttoned white shirt, and silver rings, holding a small black lamb in his arms in &lt;Video 1&gt;.\n&lt;Video 1&gt; is the source video for the editing task.\n&lt;Audio 1&gt; is the synchronized audio track of &lt;Video 1&gt;, providing the background music.\n&lt;Audio 2&gt; is the voice timbre reference for &lt;Subject 1&gt;&#39;s voice, containing a spoken male voiceover.\n\nsummary:\n[video editing + audio reference + audio reuse] The target video is an edited version of &lt;Video 1&gt;. &lt;Subject 1&gt;, wearing a bright pink suit and holding a black lamb, stands in a grassy field with other white lambs in the background. The edit animates &lt;Subject 1&gt;&#39;s face to speak the user-provided dialogue. &lt;Audio 1&gt; is partially reused as the continuous background music, while the target references the calm male voice timbre of &lt;Audio 2&gt; for &lt;Subject 1&gt;&#39;s spoken lines.\n\nretention_analysis:\n&lt;Subject 1&gt; (appears in [Shot 1]): fully_preserved - the man retains his identity, wavy blonde hair, pink suit, white shirt, accessories, and the black lamb he holds, with his mouth newly animated to speak.\n&lt;Video 1&gt; (source video editing): fully_preserved - the original camera framing, warm golden hour lighting, grassy hill setting, and background white lambs are maintained while the central character is edited.\n&lt;Audio 1&gt;: partially_copy - the atmospheric background music from &lt;Audio 1&gt; is reused in the target video, mixed beneath the newly added spoken dialogue.\n&lt;Audio 2&gt;: reference - the target audio references the male voice timbre from &lt;Audio 2&gt; to generate &lt;Subject 1&gt;&#39;s spoken dialogue.\n\ndetailed_description:\nThe target video is in realistic photographic style.\n[Shot 1] The shot begins from the source &lt;Video 1&gt;, showing &lt;Subject 1&gt;, a young man with short wavy blonde hair, wearing a bright pink suit jacket, matching pink trousers, and a casually unbuttoned white shirt. He stands confidently in a sunlit green pasture, gently holding a small black lamb securely in his arms. The warm, golden hour lighting casts soft shadows across his face and the bright pink fabric of his suit. Behind him, several white lambs stand and graze on the rolling grassy hill against a clear, pale blue sky. The atmospheric background music from &lt;Audio 1&gt; plays continuously throughout the scene. &lt;Subject 1&gt; physically speaks, his mouth movements naturally syncing to the new dialogue, with his voice timbre referencing the calm male delivery from &lt;Audio 2&gt;. Looking thoughtfully forward, &lt;Subject 1&gt; (S1) speaks softly, &lt;d&gt;[English] Follow the wind, live free.&lt;/d&gt; As he delivers the line, he subtly shifts his weight, cradling the resting black lamb while the camera slowly pushes in. &lt;Subject 1&gt; (S1) continues his thought, &lt;d&gt;[English] Leave worries behind, enjoy the moment.&lt;/d&gt; Exactly as his voice stops, his lips meet in a relaxed, peaceful smile, and his jaw ceases speaking motion. He then turns his gaze slightly away toward the horizon, gently stroking the black lamb&#39;s fleece with his fingers as the camera holds on this tranquil, sunlit state through the end of the video.\n\noverall_soundscape:\nThe soundscape consists of the continuous, atmospheric background music from &lt;Audio 1&gt;, overlaid with the clear, calm male dialogue spoken by the main character, referencing the voice timbre of &lt;Audio 2&gt;.\n\nnon_diegetic_music:\nThe atmospheric, sustained background music from &lt;Audio 1&gt; is reused as the continuous score, playing quietly beneath the spoken dialogue.&quot;
+    <tr><td>H3-Context-IR</td><td><a href="scripts/readme/full-2k-i2va-h3-context-ir.sh">查看脚本</a></td><td><pre><code class="language-json">{
+  "task": {
+    "id": "&lt;task_id&gt;",
+    "model": "MiniMax-H3",
+    "status": "succeeded",
+    "created_at": "&lt;created_at&gt;",
+    "updated_at": "&lt;updated_at&gt;",
+    "content": {
+      "prompt": "For the target video, at 0.00 seconds into the target video, &lt;Picture 1&gt; (from [Shot 1]) is fully referenced.\n\nintegrated_multimodal_description: [Shot 1] This is a live-action, cinematic shot with a shallow depth of field. The camera holds a perfectly static shot throughout the entire eight-second duration, capturing a cozy family gathering in a traditional Japanese dining room. The scene opens with a large, intricately patterned blue and white ceramic bowl of ramen in the immediate foreground, rendered in crisp, sharp focus. The bowl sits on a smooth, polished long wooden table. Inside the bowl, a rich, oily golden-brown broth surrounds yellow wavy noodles, topped with two thick, round slices of chashu pork featuring visible fat marbling and a distinct spiral meat pattern. A generous mound of freshly chopped, bright green scallions rests in the center, and a crisp, dark green rectangular sheet of nori seaweed is tucked into the right edge. To the left of the bowl, a pair of light brown wooden chopsticks rests horizontally on a small, dark rectangular chopstick rest, near a small cylindrical ceramic teacup with blue painted patterns. On the right side of the table, a spherical paper lantern with a ribbed bamboo frame sits on a black wooden base. In the background, a large family of seven is gathered around the table, initially appearing as a soft, blurred presence. Behind them, traditional Japanese sliding shoji screens with wooden lattice frames are open, revealing a bright outdoor scene with lush green trees. Early in the clip, the thick, white steam rising from the hot ramen broth immediately intensifies, billowing upwards in thick, swirling clouds that dance continuously above the bowl. As the clip progresses into the middle seconds, the camera maintains its static position while the focus begins a deliberate, smooth shift deeper into the room. The foreground ramen bowl, its vibrant ingredients, and the rising steam gradu... [truncated]
     },
-    &quot;duration&quot;: 5,
-    &quot;usage&quot;: {
-      &quot;total_tokens&quot;: 39299,
-      &quot;prompt_tokens&quot;: 33323,
-      &quot;completion_tokens&quot;: 5976
+    "duration": 8,
+    "usage": {
+      "total_tokens": 22822,
+      "prompt_tokens": 12800,
+      "completion_tokens": 10022
     },
-    &quot;ratio&quot;: &quot;16:9&quot;,
-    &quot;task_type&quot;: &quot;h3_context_ir&quot;,
-    &quot;modality&quot;: &quot;text&quot;
+    "ratio": "16:9",
+    "task_type": "h3_context_ir",
+    "modality": "text"
   }
 }</code></pre></td></tr>
-    <tr><td>H3-Base</td><td><a href="scripts/readme/full-2k-ref2va-h3-base.sh">View script</a></td><td><a href="assets/r2va.mp4">r2va.mp4</a><br></td></tr>
-    <tr><td>Reference 2K result by directly calling Open Platform API</td><td><a href="scripts/readme/full-2k-ref2va-reference-2k-result-by-directly-calling-open-platform-api.sh">View script</a></td><td><a href="assets/r2va_2k.mp4">r2va_2k.mp4</a></td></tr>
-    <tr><td>H3 API 2K in Open Platform for reference</td><td><a href="scripts/readme/full-2k-ref2va-h3-api-2k-in-open-platform-for-reference.sh">View script</a></td><td><a href="assets/r2va_direct_2k.mp4">r2va_direct_2k.mp4</a><br></td></tr>
-    <tr><td>Reference 768P result by directly calling Open Platform API</td><td><a href="scripts/readme/full-2k-ref2va-reference-768p-result-by-directly-calling-open-platform-api.sh">View script</a></td><td><a href="assets/r2va_direct_768p.mp4">r2va_direct_768p.mp4</a><br></td></tr>
+    <tr><td>H3-Base</td><td><a href="scripts/readme/full-2k-i2va-h3-base.sh">查看脚本</a></td><td><a href="assets/i2va.mp4">i2va.mp4</a></td></tr>
+    <tr><td>H3-Regenerate-2K</td><td><a href="scripts/readme/full-2k-i2va-h3-regenerate-2k.sh">查看脚本</a></td><td><a href="assets/i2va_2k.mp4">i2va_2k.mp4</a><br></td></tr>
+    <tr><td>直接调用开放平台 API 得到的参考 2K 结果</td><td><a href="scripts/readme/full-2k-i2va-reference-2k-result-by-directly-calling-open-platform-api.sh">查看脚本</a></td><td><a href="assets/i2va_direct_2k.mp4">i2va_direct_2k.mp4</a></td></tr>
+    <tr><td>直接调用开放平台 API 得到的参考 768P 结果</td><td><a href="scripts/readme/full-2k-i2va-reference-768p-result-by-directly-calling-open-platform-api.sh">查看脚本</a></td><td><a href="assets/i2va_direct_768p.mp4">i2va_direct_768p.mp4</a></td></tr>
   </tbody>
 </table>
 
-### Prompting Guidance
+#### case-Ref2VA
 
-Prompting guidance documents from the HuggingFace release are not copied into this repository to keep the markdown layout minimal.
+- 类型：多模态参考生视频（视频 + 音频）
+- 时长：5 秒
+- 宽高比：自适应
 
+<table>
+  <thead>
+    <tr><th>阶段</th><th>请求</th><th>结果</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>H3-Context-IR</td><td><a href="scripts/readme/full-2k-ref2va-h3-context-ir.sh">查看脚本</a></td><td><pre><code class="language-json">{
+  "task": {
+    "id": "&lt;task_id&gt;",
+    "model": "MiniMax-H3",
+    "status": "succeeded",
+    "created_at": "&lt;created_at&gt;",
+    "updated_at": "&lt;updated_at&gt;",
+    "content": {
+      "prompt": "subject_definitions:\n&lt;Subject 1&gt; is the young man with short wavy blonde hair, wearing a bright pink suit jacket, matching pink trousers, an unbuttoned white shirt, and silver rings, holding a small black lamb in his arms in &lt;Video 1&gt;.\n&lt;Video 1&gt; is the source video for the editing task.\n&lt;Audio 1&gt; is the synchronized audio track of &lt;Video 1&gt;, providing the background music.\n&lt;Audio 2&gt; is the voice timbre reference for &lt;Subject 1&gt;'s voice, containing a spoken male voiceover.\n\nsummary:\n[video editing + audio reference + audio reuse] The target video is an edited version of &lt;Video 1&gt;. &lt;Subject 1&gt;, wearing a bright pink suit and holding a black lamb, stands in a grassy field with other white lambs in the background. The edit animates &lt;Subject 1&gt;'s face to speak the user-provided dialogue. &lt;Audio 1&gt; is partially reused as the continuous background music, while the target references the calm male voice timbre of &lt;Audio 2&gt; for &lt;Subject 1&gt;'s spoken lines.\n\nretention_analysis:\n&lt;Subject 1&gt; (appears in [Shot 1]): fully_preserved - the man retains his identity, wavy blonde hair, pink suit, white shirt, accessories, and the black lamb he holds, with his mouth newly animated to speak.\n&lt;Video 1&gt; (source video editing): fully_preserved - the original camera framing, warm golden hour lighting, grassy hill setting, and background white lambs are maintained while the central character is edited.\n&lt;Audio 1&gt;: partially_copy - the atmospheric background music from &lt;Audio 1&gt; is reused in the target video, mixed beneath the newly added spoken dialogue.\n&lt;Audio 2&gt;: reference - the target audio references the male voice timbre from &lt;Audio 2&gt; to generate &lt;Subject 1&gt;'s spoken dialogue.\n\ndetailed_description:\nThe target video is in realistic photographic style.\n[Shot 1] The shot begins from the source &lt;Video 1&gt;... [truncated]
+    },
+    "duration": 5,
+    "usage": {
+      "total_tokens": 39299,
+      "prompt_tokens": 33323,
+      "completion_tokens": 5976
+    },
+    "ratio": "16:9",
+    "task_type": "h3_context_ir",
+    "modality": "text"
+  }
+}</code></pre></td></tr>
+    <tr><td>H3-Base</td><td><a href="scripts/readme/full-2k-ref2va-h3-base.sh">查看脚本</a></td><td><a href="assets/r2va.mp4">r2va.mp4</a><br></td></tr>
+    <tr><td>直接调用开放平台 API 得到的参考 2K 结果</td><td><a href="scripts/readme/full-2k-ref2va-reference-2k-result-by-directly-calling-open-platform-api.sh">查看脚本</a></td><td><a href="assets/r2va_2k.mp4">r2va_2k.mp4</a></td></tr>
+    <tr><td>开放平台中供参考的 H3 API 2K 结果</td><td><a href="scripts/readme/full-2k-ref2va-h3-api-2k-in-open-platform-for-reference.sh">查看脚本</a></td><td><a href="assets/r2va_direct_2k.mp4">r2va_direct_2k.mp4</a><br></td></tr>
+    <tr><td>直接调用开放平台 API 得到的参考 768P 结果</td><td><a href="scripts/readme/full-2k-ref2va-reference-768p-result-by-directly-calling-open-platform-api.sh">查看脚本</a></td><td><a href="assets/r2va_direct_768p.mp4">r2va_direct_768p.mp4</a><br></td></tr>
+  </tbody>
+</table>
 
+### 提示词指引
 
-## License
+来自 HuggingFace 发布的提示词指引文档未复制进本仓库，以保持 markdown 布局简洁。
 
-MiniMax H3 is released under the [MiniMax H3 Community License Agreement](https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/LICENSE).
+## 许可证
 
-## Contact Us
+MiniMax H3 依据 [MiniMax H3 社区许可协议](https://huggingface.co/MiniMaxAI/MiniMax-H3/blob/main/LICENSE) 发布。
 
-Contact us at [model@minimax.io](mailto:model@minimax.io).
+## 联系我们
+
+联系我们： [model@minimax.io](mailto:model@minimax.io)。
+
+---
+
+# 附录：社区部署参考（融合自零度解说等第三方教程，已剔除越狱/审核绕过内容）
+
+> **合规说明**：以下内容整理自第三方社区教程（如"零度解说"等）中**可公开讨论的技术事实**，用于帮助理解模型构成与本地部署思路。已**剔除**其中的"无审查/越狱版"下载链接、绕过内容审核的说明，以及不当的提示词示例。
+>
+> **重要**：MiniMax 官方开源仓库分发的是 **BF16 精度权重**，并内置**安全护栏**（用户输入文本/图像/视频及增强提示词均经过自动化审核）。社区对权重进行 INT8 / NVFP4 等量化、或以 4 步加速、或从第三方获取修改版权重，**不改变模型能力本质，但可能绕过官方安全审核**——请务必遵守《MiniMax H3 社区许可协议》与所在地法律法规，仅用于合规创作。
+
+## A. 21G 体积由什么构成
+
+社区常提到的"21G 包"通常包含 H3 本地运行所需的三大类文件：
+
+| 组件 | 作用 | 说明 |
+|---|---|---|
+| 主扩散模型（diffusion_models） | 核心生成网络，负责把条件（文本/图/参考）映射到视频-音频潜变量 | 官方原生为 BF16；社区"加速版"多为 INT8 量化（如 `turbo-int8-convrot`）以压缩体积、降低显存 |
+| VAE 自编码器（vae） | 视觉潜变量 ↔ 像素帧 的解码/编码 | 与官方 VisualVAE 对应，负责把潜变量还原成视频画面 |
+| 文本编码器（text_encoders） | 把提示词文本编码为 H3 可理解的向量 | 基于 **Qwen3-VL-32B**，能力最强但最占显存；社区常用 NVFP4（4-bit）量化版把它压到约 16G 左右 |
+
+要点：
+- **文本编码器是显存大户**：Qwen3-VL-32B 即使量化也需约 16G 显存。主扩散模型 INT8 量化后约 8G，二者叠加才能跑通，所以"8G 显存可跑"的说法成立的前提是——**文本编码器也做了 NVFP4 之类的低比特量化**，否则单靠 8G 装不下完整管线。
+- 官方仓库（HF `MiniMaxAI/MiniMax-H3`）本身只提供 BF16 权重 + 部署指引，**并不承诺 8G 显存**；"8G 能跑"是社区把官方权重量化、并配合分层显存卸载实现的。
+
+## B. ComfyUI 本地部署目录结构（社区通用做法）
+
+最新版 ComfyUI 已内置 MiniMax H3 的文生视频 / 图生视频节点，部署要点如下（路径以 Windows 默认安装为例）：
+
+```text
+ComfyUI-Shared/
+└── models/
+    ├── diffusion_models/   ← 放入主扩散模型（如 *.safetensors / 量化版）
+    ├── vae/                ← 放入 VAE 自编码器
+    └── text_encoders/      ← 放入文本编码器（Qwen3-VL-32B 或其量化版）
+```
+
+工作流（workflow）JSON 文件则在 ComfyUI 中直接"加载"使用。官方 Comfy 教程与 T2V/R2V 模板见正文"本地部署 H3-Base"章节的链接。
+
+## C. 工作流类型速查（社区加速版常见命名）
+
+社区发布的加速工作流通常按"任务类型 + 步数"命名，常见 5 类（去掉越狱模型依赖、仅保留用途说明）：
+
+| 工作流 | 用途 | 说明 |
+|---|---|---|
+| `01_reference_4step_sla` | 文本 → 视频（4 步加速） | 最常用，直接由提示词生成视频 |
+| `02_derope_4plus4_sla` | 去除视频运动抖动/拖影 | 后处理，提升画面稳定性 |
+| `03_derope_dyrope…` | 更高级的运动修复 | 进阶版运动修正 |
+| `04_i2v_fl2v_4step_sla` | 图片 → 视频 | 图生视频，需提供首帧/关键帧图像 |
+| `05_ref2va_4step_sla` | 参考图 → 视频 | 多参考生视频，对应官方的 Ref2VA |
+
+> 官方原生工作流以 API / SGLang 为主（见正文）；上述带 `4step` 的是社区把去噪步数压缩到 4 步的加速变体。
+
+## D. 实测生成速度参考（社区 RTX 4090 数据）
+
+下表为社区在 **RTX 4090（24G）** 上的实测，供估算硬件需求（Kaggle 等云平台的 GPU 算力/显存不同，实际耗时会有差异）：
+
+| 分辨率 | 条件 | 单条约耗时 |
+|---|---|---|
+| 864×480（480P） | pruned fp8 + SageAttention + EasyCache | 4–5 分钟 |
+| 1280×736（720P） | pruned fp8 | 14–15 分钟 |
+| 1280×736（720P） | bf16 + 8 步 | ~10 分钟（20 步约 22 分钟） |
+
+换算到 Kaggle（详见此前可行性分析）：T4×2（32G 显存）跑 480P 约 5–10 分钟/条、720P 约 15–25 分钟/条；P100（16G）因显存不足文本编码器而易 OOM，不推荐。
+
+## E. 提示词写法要点（合规创作）
+
+- **结构化描述**：把"镜头语言、人物/物体外观、动作时序（按 0–N 秒分段）、环境动态、声音、限制项"分块写清，质量远高于一句话。
+- **时序分段**：例如"0–2 秒：…；2–5 秒：…"，让模型理解镜头推进与动作节奏。
+- **限制项（negative 思路）**：明确写出"不要……"（如不要面部漂移、不要肢体畸形、不要比例变化），可显著减少常见瑕疵。
+- 官方还提供 `h3-prompt-writing` 技能与 `base-en.txt` / `ref-en.txt` 两份指南（见正文"提示词撰写技巧"），建议优先参考官方写法。
+
+> 再次提醒：请只用于合规、正当的内容创作，遵守 MiniMax H3 社区许可协议与相关法律。
