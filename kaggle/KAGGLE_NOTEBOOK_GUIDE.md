@@ -57,6 +57,7 @@
 ## 五、想自己改？优化指引
 
 - **改默认参数/公式**：全部在单元格 6 的 `gen_ui` 源码区，`QUALITY`（清晰度档位）、`ORIENT`（方向）、`SEC_PER_STEP`（耗时标定）都是顶部常量。
+- **换文本编码器**：当前用社区 Heretic 变体（`Momoking/Qwen3-VL-32B-Heretic-MiniMax-H3-NVFP4`，14.61 GiB，与官方 NVFP4 同规格 drop-in 替换）。换回官方版：把下载清单里 `text_encoders` 一行换回 `qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors`（删除 `REPO_OVERRIDES` 对应条目），并把生成代码里 `TE` 常量改回对应文件名（CLIPLoader 类型始终为 `minimax`）。
 - **换更小的主模型**：HuggingFace `Kijai/MiniMax-H3-experimental` 有 w4a8 版主模型（12.54 GB，比现用小 40%）。改单元格 3 的下载清单 + 单元格 6 工作流里的 `unet_name` 即可。
 - **固定公网域名**：把单元格 5 的 cloudflared 换成你自己的 Cloudflare Tunnel token。
 - **提示词写法**：参考仓库 `skills/h3-prompt-writing/SKILL.md`（主体/动作/镜头/音频四段式，含负面词表）。
