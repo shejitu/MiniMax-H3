@@ -501,6 +501,9 @@ ComfyUI-Shared/
 
 ## F. Kaggle 云端部署方案
 
+> ⚠️ **2026-09-09 勘误**：本章为理论方案，其中部分数据与 Kaggle 实测有出入（"21G" 只是主模型单文件，完整量化组合为 39.55 GiB）。
+> **已验证的实操部署（含 Gradio 交互面板）见本仓库 [`kaggle/README.md`](kaggle/README.md)，或本文末尾 [附录 G](#g-kaggle-实测部署实录t4x2-已跑通gradio-交互面板)。**
+
 本地没有大显存显卡时，Kaggle Notebook 的免费 GPU 是成本最低的试跑途径。核心结论：**能跑通，`/kaggle/working` 的 20G 限制不是障碍**。
 
 ### F.1 为什么 20G 不是障碍（存储机制）
@@ -607,3 +610,32 @@ Kaggle 预装了 torch/transformers，但**没有 ComfyUI**，需自行安装（
 > 若坚持用**官方原版 BF16 权重**配合 SGLang / diffusers 部署，显存需求远高于 32G，Kaggle 免费档基本不可行，需改用付费 GPU（如 A100 80G）或本地多卡。
 
 > 再次提醒：请只用于合规、正当的内容创作，遵守 MiniMax H3 社区许可协议与相关法律。
+
+## G. Kaggle 实测部署实录（T4×2，已跑通 + Gradio 交互面板）
+
+> 2026-09-09 在 Kaggle 免费 GPU 上端到端验证，全部代码与文档在仓库 [`kaggle/`](kaggle/) 目录。
+
+### G.1 验证结果
+
+| 项目 | 实测值 |
+|---|---|
+| 显卡 | 2 × Tesla T4（各 15360 MiB，sm_75） |
+| 首条成片 | 832×480、124 帧、24fps、5.17 秒，H.264 + AAC 音轨 |
+| 端到端（首次） | 42 分钟（装环境 10 + 权重 6 + 初始化 4 + 8 步采样 30） |
+| 权重总量 | 39.55 GiB（Comfy-Org 公开仓库，免 HF token，实测下载 ≈6 分钟） |
+| 交互面板 | Gradio + cloudflared 公网隧道，上传素材/写提示词/调时长分辨率横竖屏/在线下载 |
+
+### G.2 关键结论（与附录 F 的差异）
+
+1. **存储不是障碍**：Kaggle 根分区 1.1 TB、HF 实测 135 MB/s，39.55 GiB 权重 6 分钟下完。
+2. **量化组合**：主模型 INT8-pruned-convrot 19.53 GiB + Qwen3-VL-32B NVFP4-AWQ 14.61 GiB + 视频 VAE FP16 4.85 GiB + 音频 VAE FP32 0.6 GiB。
+3. **双卡分工**：自定义节点把文本编码器固定到 GPU:1、主模型留 GPU:0，16G×2 装 39.55G 的组合全程零 OOM。
+4. **torch cu130 是分水岭**：Kaggle 驱动 580.159.04 满足升级条件；不升级 5 秒视频要 1.5~3.5 小时，升级后 8 步采样 ≈30 分钟。
+5. **GPU 选择器大坑**：元数据写小写 `nvidiaTeslaT4` 会被服务端**静默**回退 P100（torch 2.10 不支持 sm_60，直接废）——必须大写 `NvidiaTeslaT4`，并用 `kernels pull -m` 验收 `machine_shape` 字段。
+
+### G.3 完整文档与代码
+
+- 完整实操手册（步骤/参数耗时表/踩坑记录/优化方向/FAQ）：[`kaggle/README.md`](kaggle/README.md)
+- 面板版 notebook 生成器：[`kaggle/gen_ui.py`](gen_ui.py)；headless 全自动版：[`kaggle/gen_run.py`](gen_run.py)
+- 双卡分工节点源码：[`kaggle/t4x2_dual_encoder.py`](t4x2_dual_encoder.py)
+- Notebook 内置引导页：[`kaggle/KAGGLE_NOTEBOOK_GUIDE.md`](KAGGLE_NOTEBOOK_GUIDE.md)
