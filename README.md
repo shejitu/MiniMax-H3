@@ -630,12 +630,14 @@ Kaggle 预装了 torch/transformers，但**没有 ComfyUI**，需自行安装（
 1. **存储不是障碍**：Kaggle 根分区 1.1 TB、HF 实测 135 MB/s，39.55 GiB 权重 6 分钟下完。
 2. **量化组合**：主模型 INT8-pruned-convrot 19.53 GiB + Qwen3-VL-32B NVFP4-AWQ 14.61 GiB + 视频 VAE FP16 4.85 GiB + 音频 VAE FP32 0.6 GiB。
 3. **双卡分工**：自定义节点把文本编码器固定到 GPU:1、主模型留 GPU:0，16G×2 装 39.55G 的组合全程零 OOM。
-4. **torch cu130 是分水岭**：Kaggle 驱动 580.159.04 满足升级条件；不升级 5 秒视频要 1.5~3.5 小时，升级后 8 步采样 ≈30 分钟。
-5. **GPU 选择器大坑**：元数据写小写 `nvidiaTeslaT4` 会被服务端**静默**回退 P100（torch 2.10 不支持 sm_60，直接废）——必须大写 `NvidiaTeslaT4`，并用 `kernels pull -m` 验收 `machine_shape` 字段。
+4. **文本编码器一键切换**：统一版 notebook 内置 `ENCODER = "official" / "heretic"` 开关。official 走 `Comfy-Org/MiniMax-H3` 的 `text_encoders/` 子目录；heretic（社区版，人声质感更松弛）走 `Momoking/Qwen3-VL-32B-Heretic-MiniMax-H3-NVFP4` 的根目录文件，由 `REPO_OVERRIDES` + `REMOTE_NAMES` 两个映射表统一改写下载源，两种选择最终都归位到 `models/text_encoders/` 同一路径，CLIPLoader 无需改任何配置。
+5. **hf_hub_download 落盘陷阱**：落盘路径 = `local_dir / 远端文件名`。跨仓库替换编码器时（远端文件在根目录），文件会落到 `models/` 根而非 `text_encoders/` 子目录，CLIPLoader 下拉列表为空（报 `clip_name ... not in []`）——必须下载后按目标路径 `rename` 归位，并加逐目录 glob 终检打印确认。
+6. **torch cu130 是分水岭**：Kaggle 驱动 580.159.04 满足升级条件；不升级 5 秒视频要 1.5~3.5 小时，升级后 8 步采样 ≈30 分钟。
+7. **GPU 选择器大坑**：元数据写小写 `nvidiaTeslaT4` 会被服务端**静默**回退 P100（torch 2.10 不支持 sm_60，直接废）——必须大写 `NvidiaTeslaT4`，并用 `kernels pull -m` 验收 `machine_shape` 字段。
 
 ### G.3 完整文档与代码
 
 - 完整实操手册（步骤/参数耗时表/踩坑记录/优化方向/FAQ）：[`kaggle/README.md`](kaggle/README.md)
-- 面板版 notebook 生成器：[`kaggle/gen_ui.py`](gen_ui.py)；headless 全自动版：[`kaggle/gen_run.py`](gen_run.py)
+- 统一面板 notebook（含 `ENCODER` 编码器开关）：[`kaggle/h3-ui.ipynb`](h3-ui.ipynb)；生成器 [`kaggle/gen_ui.py`](gen_ui.py)；headless 全自动版：[`kaggle/gen_run.py`](gen_run.py)
 - 双卡分工节点源码：[`kaggle/t4x2_dual_encoder.py`](t4x2_dual_encoder.py)
 - Notebook 内置引导页：[`kaggle/KAGGLE_NOTEBOOK_GUIDE.md`](KAGGLE_NOTEBOOK_GUIDE.md)

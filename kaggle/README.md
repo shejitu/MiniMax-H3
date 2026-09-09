@@ -68,8 +68,7 @@ ComfyUI 启动参数用 `--lowvram --reserve-vram 0.8`，模型常驻约 21.6 GB
 |---|---|
 | [`gen_ui.py`](gen_ui.py) | **生成 Gradio 面板版 notebook** 的脚本：`python gen_ui.py` 产出 `h3-ui/`（notebook + 元数据），kaggle CLI 推送即得交互面板 |
 | [`gen_run.py`](gen_run.py) | 生成 headless 全自动出片版 notebook（改顶部 `IMAGE_URL`/`PROMPT` 即可换素材与提示词） |
-| [`h3-ui.ipynb`](h3-ui.ipynb) | 面板版 notebook 成品（与 gen_ui.py 产出一致，官方编码器） |
-| [`h3-ui-her.ipynb`](h3-ui-her.ipynb) | 面板版 notebook · **Heretic 编码器变体**（文本编码器换社区 Heretic 版，其余相同） |
+| [`h3-ui.ipynb`](h3-ui.ipynb) | 面板版 notebook 成品（v3 统一版：内置使用指引 + `ENCODER` 编码器开关，默认 Heretic） |
 | [`t4x2_dual_encoder.py`](t4x2_dual_encoder.py) | 双卡分工自定义节点源码（已内嵌于上述 notebook 的 cell 中，此处单独存放便于阅读/修改） |
 | [`KAGGLE_NOTEBOOK_GUIDE.md`](KAGGLE_NOTEBOOK_GUIDE.md) | 写进 Kaggle notebook 顶部的 markdown 引导页（面板用法/排障/优化） |
 
@@ -144,7 +143,7 @@ ComfyUI 启动参数用 `--lowvram --reserve-vram 0.8`，模型常驻约 21.6 GB
 | 4 | 探测日志显示"跑完了"其实没有 | Kaggle 的 `kernels output` **只在会话结束后**给日志 | 运行中看日志用 `GetKernelSessionLogsStream` SSE 流接口 |
 | 5 | 采样巨慢（小时级） | 未升 cu130，INT8 走反量化慢路径 | pip 装 cu130 轮子（本仓库 notebook 已内置该步骤） |
 
-## 7. 文本编码器可替换（官方 / Heretic 变体）
+## 7. 文本编码器一键切换（官方 ↔ Heretic，统一 notebook）
 
 CLIPLoader 的类型始终是 `minimax`，换编码器只是换 `text_encoders/` 下的文件名：
 
@@ -153,7 +152,7 @@ CLIPLoader 的类型始终是 `minimax`，换编码器只是换 `text_encoders/`
 | 官方 NVFP4-AWQ | Comfy-Org/MiniMax-H3 `qwen3vl_32b_minimax_h3_nvfp4_awq.safetensors` | 14.61 GiB | 默认 |
 | **Heretic NVFP4** | Momoking/Qwen3-VL-32B-Heretic-MiniMax-H3-NVFP4 `qwen3vl_32b_heretic_minimax_h3_nvfp4.safetensors` | 14.61 GiB | 社区变体，与官方同规格 drop-in 替换，作者实测峰值显存 ~9.9 GB |
 
-- **Kaggle**：`h3-ui-her.ipynb` 已内置 Heretic（下载清单走 `REPO_OVERRIDES` 指到 Momoking 仓库，工作流 `TE` 常量指向 heretic 文件名）；换回官方版只需把 SIZES 里 `text_encoders` 行与 `TE` 常量改回官方文件名。
+- **Kaggle（统一 notebook）**：`h3-ui.ipynb` 下载单元顶部 `ENCODER = "heretic"`（默认）或 `"official"`，二选一。下载清单、远端文件名（Heretic 仓库文件在根目录，需 REMOTE_NAMES 映射）、落盘归位（`hf_hub_download` 按远端文件名落盘，下载后 rename 到 `text_encoders/`）全部自动适配，工作流零改动（节点类型始终 `minimax`）。
 - **本地 ComfyUI**：把 safetensors 放进 `text_encoders` 模型目录，CLIPLoader 选中该文件、类型 `minimax` 即可。
 - 请遵循模型许可与当地法律法规合规创作。
 
